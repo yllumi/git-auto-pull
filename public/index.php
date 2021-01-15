@@ -5,7 +5,7 @@
  * 
  * Marking making file for pull instruction.
  */
-$name = $_GET['name'];
+$name = $_GET['name'] ?? 'default';
 
 $repos = explode("\n", file_get_contents('repos'));
 $repoArray = [];
