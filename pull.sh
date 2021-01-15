@@ -1,13 +1,26 @@
 #!/bin/bash
 
-BASE_PATH="/Applications/XAMPP/xamppfiles/htdocs/workspaces/apps.codepolitan.com"
-FILE=$BASE_PATH/public/puller/mark.txt
+source=/home/toharyan/Developments/autopull
+repos="public/repos"
 
-if test -f "$FILE"; then
-    cd "${BASE_PATH}"
-    git pull origin master
-    echo $(date -u) "Successfully pulled"  >> "${BASE_PATH}/public/puller/log.txt"
-    rm "${BASE_PATH}/public/puller/mark.txt"
-else
-    echo $(date -u) "No action"  >> "${BASE_PATH}/public/puller/log.txt"
-fi
+while IFS= read -r line
+do
+	echo $line | while read col
+	do
+		IFS=" "
+	  	set - $col
+  		REPONAME=$1
+  		REPOFOLDER=$2
+  		REPOBRANCH=$3
+
+	  	if test -f "mark/$REPONAME"; then
+		    rm mark/$REPONAME
+	  		echo "Pulling $REPOFOLDER"
+	  		cd $REPOFOLDER
+		    git pull origin $REPOBRANCH
+		    echo $(date -u) "- $REPONAME - Successfully pulled"  >> "$source/log.txt"
+	    else
+		    echo $(date -u) "- $REPONAME - No action"  >> "$source/log.txt"
+	  	fi
+	done
+done < "$repos"
