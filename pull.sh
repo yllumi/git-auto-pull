@@ -1,8 +1,6 @@
 #!/bin/bash
 
-SOURCE=/home/toharyan/Developments/gitautopull
-
-
+SOURCE=$PWD
 touch "public/log.txt" 
 while IFS= read -r line
 do
