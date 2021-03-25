@@ -19,7 +19,7 @@ do
 		    git pull origin $REPOBRANCH
 		    echo $(date -u) "- $REPONAME - Successfully pulled"  >> "$SOURCE/public/log.txt"
 	    else
-		    echo $(date -u) "- $REPONAME - No action" >> "$SOURCE/public/log.txt"
+		    echo $(date -u) "- $REPONAME - No action"
 	  	fi
 	done
 done < "public/repos"
