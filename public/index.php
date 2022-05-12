@@ -38,5 +38,3 @@ $markFile = fopen("../mark/".$name, "w") or die("Unable to open file.");
 fwrite($markFile, $repos[$name]);
 fclose($markFile);
 echo "Done!";
-
-exec('../pull.sh');
